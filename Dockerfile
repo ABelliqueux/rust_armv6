@@ -23,7 +23,7 @@ RUN apt-get update -qq && \
            "${RPI_TOOLS}/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64" && \
     # Clone project
     git -C "/" clone -q --depth=1 https://github.com/ABelliqueux/endbasic.git "work" && \
-    cd /work && \
+    cd /work && \ 
     # Then get rid of git as we only needed it to fetch the rpi tools
     apt-get purge -qq git && \
     # Purge anything that has become useless
