@@ -12,7 +12,7 @@ RUN dpkg --add-architecture armhf
 RUN apt-get update -qq && \
     # Install the necessary packages
     # libudev-dev will also bring in the arm libc6 and gcc packages
-    apt-get install -qq --no-install-recommends git pkg-config libudev-dev:armhf && \
+    apt-get install -qq --no-install-recommends git pkg-config libudev-dev:armhf libsdl2-dev libsdl2-ttf-dev && \
     # Add the RPI toolchain
     git -C "/" clone -q --depth=1 https://github.com/raspberrypi/tools.git "${RPI_TOOLS}" && \
     # Remove most of the repo we just downloaded as we only need a small amount
@@ -21,6 +21,9 @@ RUN apt-get update -qq && \
            "${RPI_TOOLS}/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi" \
            "${RPI_TOOLS}/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian" \
            "${RPI_TOOLS}/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64" && \
+    # Clone project
+    git -C "/" clone -q --depth=1 https://github.com/ABelliqueux/endbasic.git "work" && \
+    cd /work && \
     # Then get rid of git as we only needed it to fetch the rpi tools
     apt-get purge -qq git && \
     # Purge anything that has become useless
